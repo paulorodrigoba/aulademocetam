@@ -1,5 +1,7 @@
-package br.com.cetam.aulademo.model;
+package br.com.cetam.aulademo.controller;
 
+import br.com.cetam.aulademo.model.Pessoa;
+import br.com.cetam.aulademo.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
