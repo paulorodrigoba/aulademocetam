@@ -27,5 +27,37 @@ public class PessoaController {
         List<Pessoa> pessoas = service.listarPessoas();
         return new ResponseEntity<>(pessoas, HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Pessoa> buscarPessoaPorId(@PathVariable Long id) {
+        return service.buscarPorId(id)
+                .map(pessoa -> new ResponseEntity<>(pessoa, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Pessoa> atualizarPessoa(@PathVariable Long id, @RequestBody Pessoa pessoaAtualizada) {
+        return service.buscarPorId(id)
+                .map(pessoa -> {
+                    pessoa.setNome(pessoaAtualizada.getNome());
+                    pessoa.setEndereco(pessoaAtualizada.getEndereco());
+                    pessoa.setTelefone(pessoaAtualizada.getTelefone());
+                    Pessoa pessoaSalva = service.salvarPessoa(pessoa);
+                    return new ResponseEntity<>(pessoaSalva, HttpStatus.OK);
+                })
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarPessoa(@PathVariable Long id) {
+        return service.buscarPorId(id)
+                .map(pessoa -> {
+                    service.deletarPessoa(id);
+                    return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+                })
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+
 }
 
