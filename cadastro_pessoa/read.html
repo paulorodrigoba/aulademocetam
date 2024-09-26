@@ -8,9 +8,27 @@
   <title>Listar Pessoas</title>
 </head>
 <body>
-  <div class="container">
+  <header class="cabecalho">
+    <nav class="cabecalho__menu">
+        <a class="cabecalho__menu__link" href="index.html">Home</a>
+<!--        <a class="cabecalho__menu__link" href="create.html">Cadastro</a>-->
+        <a class="cabecalho__menu__link" href="read.html">Lista</a>
+        <!-- Menu responsivo para telas menores -->
+        <div class="menu-responsivo">
+            <a href="index.html" class="menu-responsivo__link">Home</a>
+            <a href="create.html" class="menu-responsivo__link">Cadastro</a>
+            <a href="read.html" class="menu-responsivo__link">Lista</a>
+        </div>
+    </nav>
+</header>
+  <section class="apresentacao">
+  <div class="apresentacao__conteudo__titulo">
     <h1>Lista de Pessoas</h1>
-    <ul id="lista-pessoas"></ul>
+    <ul class="apresentacao__conteudo__texto" id="lista-pessoas"></ul>
+  </section>
+    
   </div>
+
+  
 </body>
 </html>

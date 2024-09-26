@@ -1,130 +1,235 @@
-/* Estilo geral */
+/* Importação de fontes */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* Definição de variáveis de cores e fontes */
+:root {
+    --cor-primaria: #FFFFFF; /* Vermelho Santander */
+    --cor-secundaria: #CD0000; /* Amarelo Santander */
+    --cor-terciaria: #000000; /* Preto Santander */
+    --cor-hover:#FFD100 ; /* Vermelho escuro para efeito hover */
+
+    --fonte-primaria: 'Roboto', sans-serif;
+    --fonte-secundaria: "Open Sans", sans-serif;
+}
+
+/* Estilos gerais */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
+    background-color: var(--cor-primaria);
+    color: var(--cor-secundaria);
+    font-family: var(--fonte-secundaria);
+}
+
+
+/* Estilos para o cabeçalho */
+.cabecalho {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.cabecalho__menu {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.cabecalho__menu__link {
+    font-family: var(--fonte-primaria);
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--cor-primaria);
+    transition: color 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.cabecalho__menu__link:hover {
+    background-color: var(--cor-primaria);
+    color: var(--cor-terciaria);
+}
+
+/* Estilos para o menu responsivo */
+.menu-responsivo {
+  display: none;
+}
+
+.menu-responsivo__link {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: var(--cor-terciaria);
+  margin: 10px 0;
+}
+
+.apresentacao {
+  padding: 5% 10%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  background-image: url('https://source.unsplash.com/random/1600x900'); /* Substitua pela sua imagem de fundo */
-  background-size: cover;
-  background-position: center;
+  align-content: center;
+  justify-content: center;
 }
-
-/* Caixa central */
-.box {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 100%;
-  max-width: 400px;
-  margin: 20px;
-}
-
-/* Cabeçalho */
-h1 {
-  font-size: 28px;
+/* Estilos para o texto */
+.apresentacao__conteudo__titulo {
+  font-size: 2rem;
+  font-family: var(--fonte-primaria);
+  color: var(--cor-terciaria);
   margin-bottom: 20px;
 }
 
-/* Inputs */
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: none;
-  border-bottom: 1px solid #ccc;
-  outline: none;
-  font-size: 16px;
+.apresentacao__conteudo__texto {
+  font-size: 1.2rem;
+  text-align: justify;
+  margin-bottom: 20px;
 }
 
-/* Botões */
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 15px; 
+    border-radius: 7px;
+    border: 1px solid Macce;
+    transition: all Linear 190ms;
+    font-size: 0.9em; 
+    color: 08444; 
+    margin-bottom: 8px;
+}
+
 button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
+  background-color: var(--cor-secundaria);
+  color: var(--cor-primaria);
+  padding: 2px 8px;
   border: none;
   border-radius: 4px;
+  margin-top: 8px;
   cursor: pointer;
-  font-size: 16px;
 }
 
 button:hover {
-  background-color: #3e8e41;
+  background-color: var(--cor-hover);
 }
 
-/* Media Queries para diferentes tamanhos de tela */
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--cor-primaria);
+  border-radius: 10px;
+  padding: 34px;
+  margin-bottom: 20px;
+}
 
-/* Smartphones em modo retrato */
-@media (max-width: 600px) {
-  body {
-    flex-direction: column;
-    padding: 20px;
-  }
-  
-  .box {
-    padding: 20px;
-    width: 100%;
-    max-width: 300px;
-  }
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 
-  h1 {
-    font-size: 24px;
-  }
+.campo{
+  padding: 15px; 
+  border-radius: 7px;
+  border: 1px solid Macce;
+  transition: all Linear 190ms;
+  font-size: 0.9em; 
+  color: 08444; 
+  margin-bottom: 8px;
+}
 
-  input {
-    font-size: 14px;
-  }
+.campo::placeholder{
+  color: 0#666;
+}
+.btn{
+  padding: 15px;
+  color: var(--cor-primaria);
+  font-weight: 600;
+  border: none;
+  margin-top: 20px;
+  border-radius: 7px;
+  background-color: var(--cor-secundaria);
+  cursor: pointer;
+  transition: alt Linear 198ms;
 
-  button {
-    padding: 10px 15px;
-    font-size: 14px;
+}
+
+.btn:hover{
+  background-color: var(--cor-hover);
+  transform: scale (1.04);
+
+}
+/* Estilos para o rodapé */
+.rodape {
+  background-color: var(--cor-secundaria);
+  color: var(--cor-primaria);
+  padding: 24px;
+  text-align: center;
+}
+
+.rodape__menu {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+.rodape__menu__link {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: var(--cor-terciaria);
+  transition: color 0.3s ease;
+}
+
+.rodape__menu__link:hover {
+  color: var(--cor-hover);
+}
+
+/* Media queries para ajustes responsivos */
+
+/* Ajustes para telas menores que 1200px */
+@media (max-width: 1200px) {
+  .apresentacao {
+      padding: 5% 5%;
   }
 }
 
-/* Tablets e pequenos dispositivos */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .box {
-    padding: 30px;
-    width: 100%;
-    max-width: 350px;
+/* Ajustes para telas menores que 992px */
+@media (max-width: 992px) {
+  .cabecalho__menu {
+      display: flex; /* Alterado de "display: none" para "display: flex" */
+      flex-direction: column;
+      text-align: center;
   }
-
-  h1 {
-    font-size: 26px;
-  }
-
-  input {
-    font-size: 15px;
-  }
-
-  button {
-    padding: 11px 18px;
-    font-size: 15px;
+  .menu-responsivo {
+      display: none; /* Mantido para ocultar o menu responsivo */
   }
 }
 
-/* Notebooks e desktops */
-@media (min-width: 1025px) {
-  .box {
-    padding: 40px;
-    width: 100%;
-    max-width: 450px;
+/* Ajustes para telas menores que 768px (tablets em modo retrato e dispositivos móveis) */
+@media (max-width: 768px) {
+  .cabecalho__menu {
+      flex-direction: row;
+      gap: 10px;
   }
-
-  h1 {
-    font-size: 32px;
+  .cabecalho__menu__link {
+      font-size: 1.2rem;
+      padding: 8px 12px;
   }
-
-  input {
-    font-size: 18px;
+  .menu-responsivo__link {
+      margin: 5px 0;
   }
-
-  button {
-    padding: 14px 22px;
-    font-size: 18px;
+  .apresentacao {
+      padding: 5% 8%;
   }
 }

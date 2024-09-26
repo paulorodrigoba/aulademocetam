@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
-  <title>Bem-vindo ao Sistema de Cadastro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pessoa</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Bem-vindo ao Sistema de Cadastro de Pessoas</h1>
-    <p>Escolha uma das opções abaixo para realizar uma operação:</p>
+<header class="cabecalho">
+    <nav class="cabecalho__menu">
+        <a class="cabecalho__menu__link" href="index.html">Home</a>
+<!--        <a class="cabecalho__menu__link" href="create.html">Cadastro</a>-->
+        <a class="cabecalho__menu__link" href="read.html">Lista</a>
+        <!-- Menu responsivo para telas menores -->
+        <div class="menu-responsivo">
+            <a href="index.html" class="menu-responsivo__link">Home</a>
+            <a href="create.html" class="menu-responsivo__link">Cadastro</a>
+            <a href="read.html" class="menu-responsivo__link">Lista</a>
+        </div>
+    </nav>
+</header>
+<main class="apresentacao">
+    <section class="apresentacao__conteudo">
+        <h1 class="apresentacao__conteudo__titulo">Cadastrar Pessoa</h1>
+        <div class="card">
+        <form id="form-cadastro">
+            <input class = "campo" type="text" class="nome" name="nome" placeholder="Nome" required>
+            <input class = "campo" type="text" class="endereco" name="endereco" placeholder="Endereço" required>
+            <input class = "campo" type="text" class="telefone" name="telefone" placeholder="Telefone" required>
+            <button class="btn" type="submit">Cadastrar</button>
+        </form>
+        </div>
+    </section>
+</main>
+<footer class="rodape">
+    <p>Desenvolvido por Paulo Rodrigo</p>
 
-    <div class="buttons">
-      <button onclick="window.location.href='create.html'">Cadastrar Pessoa</button>
-      <button onclick="window.location.href='read.html'">Listar Pessoas</button>
-      <button onclick="window.location.href='update.html'">Editar Pessoa</button>
-      <button onclick="window.location.href='delete.html'">Deletar Pessoa</button>
-    </div>
-  </div>
+</footer>
 </body>
 </html>

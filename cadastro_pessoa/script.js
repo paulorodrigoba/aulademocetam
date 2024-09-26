@@ -1,42 +1,55 @@
+// URL da API
 const apiUrl = "http://localhost:8080/api/pessoas";
 
+// Seleção de elementos do formulário
 const formulario = document.querySelector("#form-cadastro");
-
 const Inome = document.querySelector(".nome");
 const Iendereco = document.querySelector(".endereco");
 const Itelefone = document.querySelector(".telefone");
 
+// Função para cadastrar uma nova pessoa
 function cadastrar() {
+  const pessoaData = {
+    nome: Inome.value,
+    endereco: Iendereco.value,
+    telefone: Itelefone.value
+  };
+
   fetch(apiUrl, {
+    method: "POST",
     headers: {
       'Accept': 'application/json',
-      'Content-type': 'application/json'
+      'Content-Type': 'application/json'
     },
-    method: "POST",
-    body: JSON.stringify({
-      nome: Inome.value,
-      endereco: Iendereco.value,
-      telefone: Itelefone.value
-    })
+    body: JSON.stringify(pessoaData)
   })
-  .then(function (res) {
+  .then(res => {
     if (res.ok) {
       return res.json();
     } else {
       throw new Error('Erro ao cadastrar');
     }
   })
-  .then(function (data) {
+  .then(data => {
     console.log("Cadastro realizado:", data);
     alert("Cadastro realizado com sucesso!");
     listarPessoas(); // Atualiza a lista de pessoas
+    limpar(); // Limpa os campos do formulário
   })
-  .catch(function (error) {
+  .catch(error => {
     console.error("Erro:", error);
     alert("Erro ao realizar o cadastro!");
   });
 }
 
+// Função para limpar os campos do formulário
+function limpar() {
+  Inome.value = "";
+  Iendereco.value = "";
+  Itelefone.value = "";
+}
+
+// Função para listar pessoas
 function listarPessoas() {
   fetch(apiUrl)
     .then(response => {
@@ -47,19 +60,16 @@ function listarPessoas() {
     })
     .then(pessoas => {
       console.log("Lista de pessoas:", pessoas);
-
       // Gerar o HTML da lista de pessoas
-      let listaHTML = "";
-      pessoas.forEach(pessoa => {
-        listaHTML += `
-          <li>
-            Nome: ${pessoa.nome}, Endereço: ${pessoa.endereco}, Telefone: ${pessoa.telefone}
-            <button onclick="editarPessoa(${pessoa.id})">Editar</button>
-            <button onclick="deletarPessoa(${pessoa.id})">Deletar</button>
-          </li>
-        `;
-      });
-
+      const listaHTML = pessoas.map(pessoa => `
+        <ul>  
+          <li>Nome: ${pessoa.nome}</li>
+          <li>Endereço: ${pessoa.endereco}</li>
+          <li>Telefone: ${pessoa.telefone}</li>
+          <button onclick="editarPessoa(${pessoa.id})">Editar</button>
+          <button onclick="deletarPessoa(${pessoa.id})">Deletar</button>
+        </ul>`).join("");
+      
       // Inserir a lista gerada no elemento HTML com o id "lista-pessoas"
       document.getElementById("lista-pessoas").innerHTML = listaHTML;
     })
@@ -68,16 +78,61 @@ function listarPessoas() {
     });
 }
 
-// Exemplo de funções para editar e deletar
+// Função para editar pessoa
 function editarPessoa(id) {
-  // Implementar a lógica para editar a pessoa
-  console.log(`Editando pessoa com ID: ${id}`);
+  const nome = prompt("Informe o novo nome:");
+  const endereco = prompt("Informe o novo endereço:");
+  const telefone = prompt("Informe o novo telefone:");
+
+  if (nome && endereco && telefone) {
+    const apiUrlEdit = `${apiUrl}/${id}`; // URL específica da pessoa a ser editada
+
+    fetch(apiUrlEdit, {
+      method: 'PUT', // Ou 'PATCH' dependendo de como a API está configurada
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        nome: nome,
+        endereco: endereco,
+        telefone: telefone,
+      }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro ao editar pessoa');
+      }
+      console.log(`Pessoa com ID ${id} editada com sucesso.`);
+      listarPessoas(); // Atualiza a lista de pessoas após a edição
+    })
+    .catch(error => console.error("Erro ao editar pessoa:", error));
+  } else {
+    console.log("Edição cancelada ou dados inválidos.");
+  }
 }
 
+// Função para deletar pessoa
 function deletarPessoa(id) {
-  // Implementar a lógica para deletar a pessoa
-  console.log(`Deletando pessoa com ID: ${id}`);
+  const apiUrlDelete = `${apiUrl}/${id}`; // URL específica da pessoa a ser deletada
+
+  fetch(apiUrlDelete, {
+    method: 'DELETE',
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Erro ao deletar pessoa');
+    }
+    console.log(`Pessoa com ID ${id} deletada com sucesso.`);
+    listarPessoas(); // Atualiza a lista de pessoas após a exclusão
+  })
+  .catch(error => console.error("Erro ao deletar pessoa:", error));
 }
 
 // Chamar a função listarPessoas ao carregar a página
 window.onload = listarPessoas;
+
+// Adicionar evento de submit ao formulário
+formulario.addEventListener('submit', function(event) {
+  event.preventDefault(); // Previne o comportamento padrão do formulário
+  cadastrar(); // Chama a função de cadastro
+});
